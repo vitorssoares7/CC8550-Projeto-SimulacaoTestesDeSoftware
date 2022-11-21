@@ -1,5 +1,3 @@
-package org.fpij.jitakyoei.model;
-
 import java.util.Date;
 
 import core.model.beans.Aluno;
