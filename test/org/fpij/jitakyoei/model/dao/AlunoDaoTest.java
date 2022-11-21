@@ -5,12 +5,12 @@ import static org.junit.Assert.assertEquals;
 import java.util.Date;
 import java.util.List;
 
-import org.fpij.jitakyoei.model.beans.Aluno;
-import org.fpij.jitakyoei.model.beans.Endereco;
-import org.fpij.jitakyoei.model.beans.Entidade;
-import org.fpij.jitakyoei.model.beans.Filiado;
-import org.fpij.jitakyoei.model.beans.Professor;
-import org.fpij.jitakyoei.util.DatabaseManager;
+import core.model.beans.Aluno;
+import core.model.beans.Endereco;
+import core.model.beans.Entidade;
+import core.model.beans.Filiado;
+import core.model.beans.Professor;
+import core.util.DatabaseManager;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

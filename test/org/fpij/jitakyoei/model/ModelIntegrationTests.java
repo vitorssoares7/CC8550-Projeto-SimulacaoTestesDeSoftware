@@ -2,13 +2,13 @@ package org.fpij.jitakyoei.model;
 
 import java.util.Date;
 
-import org.fpij.jitakyoei.model.beans.Aluno;
-import org.fpij.jitakyoei.model.beans.Endereco;
-import org.fpij.jitakyoei.model.beans.Entidade;
-import org.fpij.jitakyoei.model.beans.Filiado;
-import org.fpij.jitakyoei.model.beans.Professor;
-import org.fpij.jitakyoei.model.beans.Rg;
-import org.fpij.jitakyoei.util.DatabaseManager;
+import core.model.beans.Aluno;
+import core.model.beans.Endereco;
+import core.model.beans.Entidade;
+import core.model.beans.Filiado;
+import core.model.beans.Professor;
+import core.model.beans.Rg;
+import core.util.DatabaseManager;
 import org.junit.BeforeClass;
 
 public class ModelIntegrationTests {
