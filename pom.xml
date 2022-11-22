@@ -5,6 +5,11 @@
     <version>1</version>
     <dependencies>
         <dependency>
+            <groupId>org.junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
@@ -16,7 +21,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>db4o</groupId>
+            <groupId>com.db4o</groupId>
             <artifactId>db4o</artifactId>
             <version>7.4.106.13438</version>
         </dependency>
@@ -46,7 +51,7 @@
         </dependency>
 
         <dependency>
-            <groupId>forms</groupId>
+            <groupId>com.jgoodies.forms</groupId>
             <artifactId>forms</artifactId>
             <version>1.0</version>
         </dependency>
