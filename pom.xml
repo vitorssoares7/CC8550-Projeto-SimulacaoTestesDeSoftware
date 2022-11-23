@@ -3,6 +3,14 @@
     <groupId>jitakyoei</groupId>
     <artifactId>jitakyoei</artifactId>
     <version>1</version>
+    
+    <repositories>
+        <repository>
+          <id>libs</id>
+          <url>file://${project.basedir}/lib</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.assertj</groupId>
