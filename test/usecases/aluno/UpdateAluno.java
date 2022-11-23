@@ -1,4 +1,4 @@
-package model.dao;
+package usecases.aluno;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,35 +18,38 @@ import org.junit.Test;
 
 import app.utils.DatabaseManager;
 
-public class AlunoDaoTest {
+public class UpdateAluno {
 	
 	private static IDAO<Aluno> alunoDao;
 	private static Aluno aluno;
 	private static Entidade entidade;
 	private static Endereco endereco;
-	private static Filiado f1;
+	private static Filiado filiado;
 	private static Filiado filiadoProf;
 	private static Professor professor;
 	
 	@BeforeClass
 	public static void setUp(){
 		DatabaseManager.setEnviroment(DatabaseManager.TEST);
-		f1 = new Filiado();
-		f1.setNome("Aécio");
-		f1.setCpf("036.464.453-27");
-		f1.setDataNascimento(new Date());
-		f1.setDataCadastro(new Date());
-		f1.setId(1332L);
+		filiado = new Filiado();
+		filiado.setNome("Vitorio Lotto");
+		filiado.setCpf("841.572.150-10");
+		filiado.setDataNascimento(new Date());
+		filiado.setDataCadastro(new Date());
+		filiado.setEmail("vitorio.lotto@gmail.com");
+		filiado.setTelefone1("11992366841");
+		filiado.setId(1332L);
 		
 		endereco = new Endereco();
-		endereco.setBairro("Dirceu");
-		endereco.setCep("64078-213");
-		endereco.setCidade("Teresina");
-		endereco.setEstado("PI");
-		endereco.setRua("Rua Des. Berilo Mota");
+		endereco.setBairro("Parque Marajoara");
+		endereco.setCep("09112-280");
+		endereco.setCidade("Santo André");
+		endereco.setEstado("SP");
+		endereco.setNumero("491");
+		endereco.setRua("Rua Professora Maria Losangeles Navarro");
 		
 		filiadoProf = new Filiado();
-		filiadoProf.setNome("Professor");
+		filiadoProf.setNome("Kleginaldo Rossi");
 		filiadoProf.setCpf("036.464.453-27");
 		filiadoProf.setDataNascimento(new Date());
 		filiadoProf.setDataCadastro(new Date());
@@ -58,11 +61,11 @@ public class AlunoDaoTest {
 		
 		entidade = new Entidade();
 		entidade.setEndereco(endereco);
-		entidade.setNome("Academia 1");
+		entidade.setNome("Arbos");
 		entidade.setTelefone1("(086)1234-5432");
 		
 		aluno = new Aluno();
-		aluno.setFiliado(f1);
+		aluno.setFiliado(filiado);
 		aluno.setProfessor(professor);
 		aluno.setEntidade(entidade);
 		
@@ -83,10 +86,10 @@ public class AlunoDaoTest {
 		clearDatabase();
 		
 		alunoDao.save(aluno);
-		assertEquals("036.464.453-27", alunoDao.get(aluno).getFiliado().getCpf());
-		assertEquals("Aécio", alunoDao.get(aluno).getFiliado().getNome());
-		assertEquals("Professor", alunoDao.get(aluno).getProfessor().getFiliado().getNome());
-		assertEquals("Dirceu", alunoDao.get(aluno).getProfessor().getFiliado().getEndereco().getBairro());
+		assertEquals("841.572.150-10", alunoDao.get(aluno).getFiliado().getCpf());
+		assertEquals("Vitorio Lotto", alunoDao.get(aluno).getFiliado().getNome());
+		assertEquals("Kleginaldo Rossi", alunoDao.get(aluno).getProfessor().getFiliado().getNome());
+		assertEquals("Parque Marajoara", alunoDao.get(aluno).getProfessor().getFiliado().getEndereco().getBairro());
 	}
 	
 	@Test
@@ -96,7 +99,7 @@ public class AlunoDaoTest {
 		
 		alunoDao.save(aluno);
 		assertEquals(1, alunoDao.list().size());
-		assertEquals("Aécio", aluno.getFiliado().getNome());
+		assertEquals("Vitorio Lotto", aluno.getFiliado().getNome());
 		
 		Aluno a1 = alunoDao.get(aluno);
 		a1.getFiliado().setNome("TesteUpdate");
@@ -136,13 +139,13 @@ public class AlunoDaoTest {
 		alunoDao.save(aluno);
 		
 		Filiado f = new Filiado();
-		f.setNome("Aécio");
+		f.setNome("Vitorio Lotto");
 		Aluno a = new Aluno();
 		a.setFiliado(f);
 		
 		List<Aluno> result = alunoDao.search(a);
 		assertEquals(1, result.size());
-		assertEquals("036.464.453-27", result.get(0).getFiliado().getCpf());
+		assertEquals("841.572.150-10", result.get(0).getFiliado().getCpf());
 		
 		clearDatabase();
 		assertEquals(0, alunoDao.search(a).size());
