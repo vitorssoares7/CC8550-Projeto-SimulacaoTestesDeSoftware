@@ -38,6 +38,7 @@ public class UpdateAluno {
 		filiado.setDataCadastro(new Date());
 		filiado.setEmail("vitorio.lotto@gmail.com");
 		filiado.setTelefone1("11992366841");
+		filiado.setRegistroCbj("123");
 		filiado.setId(1332L);
 		
 		endereco = new Endereco();
@@ -80,16 +81,30 @@ public class UpdateAluno {
 		assertEquals(0, alunoDao.list().size());
 	}
 	
-	
+	// Cenário 01
 	@Test
-	public void  testSalvarAlunoComAssociassoes() throws Exception{
+	public void  ReturnsOk() throws Exception {
+		// Arange
 		clearDatabase();
+		assertEquals(0, alunoDao.list().size());
 		
 		alunoDao.save(aluno);
-		assertEquals("841.572.150-10", alunoDao.get(aluno).getFiliado().getCpf());
-		assertEquals("Vitorio Lotto", alunoDao.get(aluno).getFiliado().getNome());
-		assertEquals("Kleginaldo Rossi", alunoDao.get(aluno).getProfessor().getFiliado().getNome());
-		assertEquals("Parque Marajoara", alunoDao.get(aluno).getProfessor().getFiliado().getEndereco().getBairro());
+		assertEquals(1, alunoDao.list().size());
+		assertEquals("Vitorio Lotto", aluno.getFiliado().getNome());
+		
+		
+
+		// Act
+		Aluno a1 = alunoDao.get(aluno);
+		a1.getFiliado().setNome("Jefferson Tomiatti");
+		alunoDao.save(a1);
+		
+		Aluno a2 = alunoDao.get(a1);
+
+
+		// Assert
+		assertEquals("Jefferson Tomiatti", a2.getFiliado().getNome());
+		assertEquals(1, alunoDao.list().size());
 	}
 	
 	@Test
