@@ -103,8 +103,6 @@ public class UpdateAluno {
 		assertEquals(1, alunoDao.list().size());
 		assertEquals("Vitorio Lotto", aluno.getFiliado().getNome());
 		
-		
-
 		// Act
 		Aluno a1 = alunoDao.get(aluno);
 		a1.getFiliado().setNome("Jefferson Tomiatti");
@@ -117,70 +115,4 @@ public class UpdateAluno {
 		assertEquals("Jefferson Tomiatti", a2.getFiliado().getNome());
 		assertEquals(1, alunoDao.list().size());
 	}
-	
-	// Cenário 03
-	@Test
-	public void ReturnsInvalidData() throws Exception {
-		// Arange
-		clearDatabase();
-		assertEquals(0, alunoDao.list().size());
-		
-		alunoDao.save(aluno);
-		assertEquals(1, alunoDao.list().size());
-		assertEquals("Vitorio Lotto", aluno.getFiliado().getNome());
-
-		// Act
-		Aluno a1 = alunoDao.get(aluno);
-		a1.getFiliado().setCpf("45345234523");
-		boolean isAlunoUpdated = alunoDao.save(a1);
-	
-		Filiado f = new Filiado();
-		f.setNome("Vitorio Lotto");
-		Aluno a = new Aluno();
-		a.setFiliado(f);
-
-		List<Aluno> result = alunoDao.search(a);
-
-		// Assert
-		assertEquals(false, CPFValidator.isCPF(a1.getFiliado().getCpf()));
-		assertEquals(false, isAlunoUpdated);
-		assertEquals(1, alunoDao.list().size());
-		assertEquals(1, result.size());
-	}
-	
-	// Cenário 04
-	@Test
-	public void ReturnsAbsentData() throws Exception {
-		// Arange
-		clearDatabase();
-		assertEquals(0, alunoDao.list().size());
-		
-		alunoDao.save(aluno);
-		assertEquals(1, alunoDao.list().size());
-		assertEquals("Vitorio Lotto", aluno.getFiliado().getNome());
-
-		// Act
-		Aluno a1 = alunoDao.get(aluno);
-		aluno.getFiliado().setNome(null);
-		boolean isAlunoUpdated = alunoDao.save(a1);
-	
-		Filiado f = new Filiado();
-		f.setNome("Vitorio Lotto");
-		Aluno a = new Aluno();
-		a.setFiliado(f);
-
-		List<Aluno> result = alunoDao.search(a);
-
-		// Assert
-		assertEquals(false, isAlunoUpdated);
-		assertEquals(1, alunoDao.list().size());
-		assertEquals(1, result.size());
-	}
-	
-	@AfterClass
-	public static void closeDatabase(){
-		clearDatabase();
-		DatabaseManager.close();
-	}
-	
 }

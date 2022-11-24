@@ -192,11 +192,4 @@ public class AddAluno {
 		assertEquals(false, phoneResponse.getIsSuccess());
 		assertEquals("O campo Telefone 1 é obrigatorio", phoneResponse.getErrorMessage());
 	}
-	
-	@AfterClass
-	public static void closeDatabase(){
-		clearDatabase();
-		DatabaseManager.close();
-	}
-	
 }
