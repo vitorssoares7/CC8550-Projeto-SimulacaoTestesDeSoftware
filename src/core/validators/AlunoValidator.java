@@ -30,10 +30,6 @@ public class AlunoValidator implements IValidator<Aluno>{
 		if (!CPFValidator.isCPF(obj.getFiliado().getCpf()))
 			return false;
 
-		if (obj.getFiliado().getTelefone1().contains("[a-zA-Z]+") && obj.getFiliado().getTelefone1().length() < 8) {
-			return false;
-		}
-
 		return true;
 	}
 }
