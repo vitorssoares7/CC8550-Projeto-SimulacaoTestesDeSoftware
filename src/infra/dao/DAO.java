@@ -37,8 +37,6 @@ public class DAO<E> implements IDAO<E> {
 	
 	@Override
 	public synchronized boolean save(E object) {
-		System.out.println("DAOImpl.save()");
-		System.out.println(object);
 		if(validator.validate(object)){
 			db.store(object);
 			db.commit();
