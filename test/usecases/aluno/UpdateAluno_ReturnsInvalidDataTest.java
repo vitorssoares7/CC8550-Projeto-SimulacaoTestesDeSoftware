@@ -57,6 +57,7 @@ public class UpdateAluno_ReturnsInvalidDataTest {
 		endereco.setEstado("SP");
 		endereco.setNumero("491");
 		endereco.setRua("Rua Professora Maria Losangeles Navarro");
+		filiado.setEndereco(endereco);
 		
 		filiadoProf = new Filiado();
 		filiadoProf.setNome("Kleginaldo Rossi");

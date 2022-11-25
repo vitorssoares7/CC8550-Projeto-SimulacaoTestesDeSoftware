@@ -11,7 +11,7 @@ public class EntidadeValidator implements IValidator<Entidade>{
 
 		if (obj.getTelefone1() == null || obj.getTelefone1().equals(""))
 			return false;
-		else if(obj.getCnpj().length() > 12){
+		else if(obj.getTelefone1().length() > 12){
 			return false;
 		}
 
