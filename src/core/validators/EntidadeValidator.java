@@ -11,9 +11,15 @@ public class EntidadeValidator implements IValidator<Entidade>{
 
 		if (obj.getTelefone1() == null || obj.getTelefone1().equals(""))
 			return false;
+		else if(obj.getTelefone1().length() > 12){
+			return false;
+		}
 
 		if (obj.getCnpj() == null || obj.getCnpj().equals(""))
 			return false;
+		else if(obj.getCnpj().length() > 14){
+			return false;
+		}
 
 		if (!enderecoValidator.validate(obj.getEndereco()))
 			return false;
