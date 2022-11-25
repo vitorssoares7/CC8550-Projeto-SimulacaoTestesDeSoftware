@@ -12,7 +12,6 @@ import core.entities.Filiado;
 import core.entities.Professor;
 import infra.interfaces.IDAO;
 import infra.dao.DAO;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -122,4 +121,5 @@ public class SearchAluno {
 		assertEquals(0, result.size());
 
 	}
+	
 }

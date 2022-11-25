@@ -189,7 +189,7 @@
     </dependencies>
     <build>
         <sourceDirectory>./src</sourceDirectory>
-        <testSourceDirectory>./test</testSourceDirectory>
+        <testSourceDirectory>./test/usecases/</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

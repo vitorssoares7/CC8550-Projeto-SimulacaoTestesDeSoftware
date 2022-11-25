@@ -14,14 +14,12 @@ import core.entities.Rg;
 import core.validators.AlunoValidator;
 import infra.interfaces.IDAO;
 import infra.dao.DAO;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import app.utils.CPFValidator;
 import app.utils.DatabaseManager;
 
-public class UpdateAluno {
+public class UpdateAluno_ReturnsOk {
 	
 	private static IDAO<Aluno> alunoDao;
 	private static Aluno aluno;

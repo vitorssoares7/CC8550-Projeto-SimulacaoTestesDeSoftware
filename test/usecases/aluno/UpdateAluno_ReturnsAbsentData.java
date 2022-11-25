@@ -17,7 +17,6 @@ import infra.dao.DAO;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import app.utils.CPFValidator;
 import app.utils.DatabaseManager;
 
 public class UpdateAluno_ReturnsAbsentData {
