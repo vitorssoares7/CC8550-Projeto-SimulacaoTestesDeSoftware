@@ -89,6 +89,7 @@ public class AddAlunoTest {
 		filiado.setRg(rg);
 		filiado.setTelefone1("11992366841");
 		filiado.setId(1332L);
+		filiado.setEndereco(endereco);
 
 		aluno = new Aluno();
 		aluno.setFiliado(filiado);

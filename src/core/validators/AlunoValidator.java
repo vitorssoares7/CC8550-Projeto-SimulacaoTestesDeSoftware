@@ -6,6 +6,9 @@ import core.interfaces.IValidator;
 
 public class AlunoValidator implements IValidator<Aluno>{
 	public boolean validate(Aluno obj) {
+		System.out.println(obj.getFiliado());
+		EnderecoValidator enderecoValidator = new EnderecoValidator();
+
 		if (obj.getFiliado().getCpf() == null || obj.getFiliado().getCpf().equals(""))
 			return false;
 
@@ -28,6 +31,9 @@ public class AlunoValidator implements IValidator<Aluno>{
 			return false;
 
 		if (!CPFValidator.isCPF(obj.getFiliado().getCpf()))
+			return false;
+
+		if (!enderecoValidator.validate(obj.getFiliado().getEndereco()))
 			return false;
 
 		return true;
