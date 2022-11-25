@@ -20,7 +20,7 @@ import org.junit.Test;
 import app.utils.CPFValidator;
 import app.utils.DatabaseManager;
 
-public class UpdateAluno_ReturnsInvalidData {
+public class UpdateAluno_ReturnsInvalidDataTest {
 	
 	private static IDAO<Aluno> alunoDao;
 	private static Aluno aluno;

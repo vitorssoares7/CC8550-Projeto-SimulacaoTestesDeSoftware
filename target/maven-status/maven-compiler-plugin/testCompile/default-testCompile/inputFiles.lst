@@ -1,2 +1,6 @@
-C:\Users\Vitor Soares\Documents\FEI\CC8550-Projeto-SimulacaoTestesDeSoftware\test\model\dao\AlunoDaoTest.java
-C:\Users\Vitor Soares\Documents\FEI\CC8550-Projeto-SimulacaoTestesDeSoftware\test\model\ModelIntegrationTests.java
+C:\Users\Vitor Soares\Documents\FEI\CC8550-Projeto-SimulacaoTestesDeSoftware\test\usecases\aluno\UpdateAluno_ReturnsOkTest.java
+C:\Users\Vitor Soares\Documents\FEI\CC8550-Projeto-SimulacaoTestesDeSoftware\test\usecases\aluno\UpdateAluno_ReturnsInvalidDataTest.java
+C:\Users\Vitor Soares\Documents\FEI\CC8550-Projeto-SimulacaoTestesDeSoftware\test\models\ValidatorResponse.java
+C:\Users\Vitor Soares\Documents\FEI\CC8550-Projeto-SimulacaoTestesDeSoftware\test\usecases\aluno\SearchAlunoTest.java
+C:\Users\Vitor Soares\Documents\FEI\CC8550-Projeto-SimulacaoTestesDeSoftware\test\usecases\aluno\AddAlunoTest.java
+C:\Users\Vitor Soares\Documents\FEI\CC8550-Projeto-SimulacaoTestesDeSoftware\test\usecases\aluno\UpdateAluno_ReturnsAbsentDataTest.java

@@ -13,19 +13,15 @@ import core.entities.Professor;
 import core.entities.Rg;
 import core.validators.AlunoValidator;
 import infra.interfaces.IDAO;
-import models.ValidatorResponse;
-import net.java.dev.genesis.annotation.ValidateBefore;
 import infra.dao.DAO;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import app.utils.CPFValidator;
 import app.utils.DatabaseManager;
 
-public class AddAluno {
+public class AddAlunoTest {
 	
-	private static AlunoValidator alunoValidator;
 	private static IDAO<Aluno> alunoDao;
 	private static Aluno aluno;
 	private static Entidade entidade;
@@ -38,8 +34,6 @@ public class AddAluno {
 	@BeforeClass
 	public static void setUp(){
 		DatabaseManager.setEnviroment(DatabaseManager.TEST);
-
-		alunoValidator = new AlunoValidator();
 
 		rg = new Rg();
 		rg.setNumero("18.889.037-3");
@@ -79,25 +73,13 @@ public class AddAluno {
 		}
 		assertEquals(0, alunoDao.list().size());
 	}
-
-	
-	private ValidatorResponse validateAluno(Aluno aluno, String message) {
-		ValidatorResponse response = new ValidatorResponse();
-		if (alunoValidator.validate(aluno)) {
-			response.setIsSuccess(true);
-		}
-		else {
-			response.setIsSuccess(false);
-			response.setErrorMessage(message);
-		}
-		return response;
-
-	}
 	
 	// Cenário 01
 	@Test
 	public void ReturnsOk() throws Exception {
 		// Arange
+		clearDatabase();
+
 		filiado = new Filiado();
 		filiado.setNome("Vitorio Lotto");
 		filiado.setCpf("39305285848");
@@ -114,28 +96,30 @@ public class AddAluno {
 		aluno.setEntidade(entidade);
 		
 		// Act
-		ValidatorResponse response = validateAluno(aluno, null);
+		boolean isAlunoSaved = alunoDao.save(aluno);
 
 		// Assert
-		assertEquals(true, response.getIsSuccess());
-		assertEquals(null, response.getErrorMessage());
+		assertEquals(true, isAlunoSaved);
+		assertEquals(1, alunoDao.list().size());
 
-		assertEquals("393.052.858-48", CPFValidator.imprimeCPF(aluno.getFiliado().getCpf()));
-		assertEquals("Vitorio Lotto", aluno.getFiliado().getNome());
-		assertEquals("vitorio.lotto@gmail.com", aluno.getFiliado().getEmail());
-		assertEquals("18.889.037-3", aluno.getFiliado().getRg().getNumero());
-		assertEquals("SSP", aluno.getFiliado().getRg().getOrgaoExpedidor());
-		assertEquals("11992366841", aluno.getFiliado().getTelefone1());
-		assertEquals("Kleginaldo Rossi", aluno.getProfessor().getFiliado().getNome());
-		assertEquals("Arbos", aluno.getEntidade().getNome());
-		assertEquals("09112-280", aluno.getProfessor().getFiliado().getEndereco().getCep());
-		assertEquals("Parque Marajoara", aluno.getProfessor().getFiliado().getEndereco().getBairro());
+		assertEquals("393.052.858-48", CPFValidator.imprimeCPF(alunoDao.get(aluno).getFiliado().getCpf()));
+		assertEquals("Vitorio Lotto", alunoDao.get(aluno).getFiliado().getNome());
+		assertEquals("vitorio.lotto@gmail.com", alunoDao.get(aluno).getFiliado().getEmail());
+		assertEquals("18.889.037-3", alunoDao.get(aluno).getFiliado().getRg().getNumero());
+		assertEquals("SSP", alunoDao.get(aluno).getFiliado().getRg().getOrgaoExpedidor());
+		assertEquals("11992366841", alunoDao.get(aluno).getFiliado().getTelefone1());
+		assertEquals("Kleginaldo Rossi", alunoDao.get(aluno).getProfessor().getFiliado().getNome());
+		assertEquals("Arbos", alunoDao.get(aluno).getEntidade().getNome());
+		assertEquals("09112-280", alunoDao.get(aluno).getProfessor().getFiliado().getEndereco().getCep());
+		assertEquals("Parque Marajoara", alunoDao.get(aluno).getProfessor().getFiliado().getEndereco().getBairro());
 	}
 	
 	// Cenário 02
 	@Test
 	public void ReturnsInvalidData() throws Exception {
 		// Arange
+		clearDatabase();
+
 		filiado = new Filiado();
 		filiado.setNome("Vitorio Lotto");
 		filiado.setCpf("45345234523");
@@ -152,11 +136,11 @@ public class AddAluno {
 		aluno.setEntidade(entidade);
 		
 		// Act
-		ValidatorResponse response = validateAluno(aluno, "CPF inválido");
+		boolean isAlunoSaved = alunoDao.save(aluno);
 
 		// Assert
-		assertEquals(false, response.getIsSuccess());
-		assertEquals("CPF inválido", response.getErrorMessage());
+		assertEquals(false, isAlunoSaved);
+		assertEquals(0, alunoDao.list().size());
 
 		assertEquals(false, CPFValidator.isCPF(filiado.getCpf()));
 	}
@@ -165,6 +149,8 @@ public class AddAluno {
 	@Test
 	public void ReturnsAbsentData() throws Exception {
 		// Arange
+		clearDatabase();
+
 		filiado = new Filiado();
 		filiado.setNome("Vitorio Lotto");
 		filiado.setCpf("");
@@ -181,15 +167,11 @@ public class AddAluno {
 		aluno.setEntidade(entidade);
 		
 		// Act
-		ValidatorResponse cpfResponse = validateAluno(aluno, "O campo CPF é obrigatorio");
-
-		ValidatorResponse phoneResponse = validateAluno(aluno, "O campo Telefone 1 é obrigatorio");
+		boolean isAlunoSaved = alunoDao.save(aluno);
 
 		// Assert
-		assertEquals(false, cpfResponse.getIsSuccess());
-		assertEquals("O campo CPF é obrigatorio", cpfResponse.getErrorMessage());
-
-		assertEquals(false, phoneResponse.getIsSuccess());
-		assertEquals("O campo Telefone 1 é obrigatorio", phoneResponse.getErrorMessage());
+		assertEquals(false, isAlunoSaved);
+		assertEquals(0, alunoDao.list().size());
 	}
+	
 }

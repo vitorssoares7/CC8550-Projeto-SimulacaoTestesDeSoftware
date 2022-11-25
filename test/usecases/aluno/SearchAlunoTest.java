@@ -10,18 +10,14 @@ import core.entities.Endereco;
 import core.entities.Entidade;
 import core.entities.Filiado;
 import core.entities.Professor;
-import core.entities.Rg;
-import core.validators.AlunoValidator;
 import infra.interfaces.IDAO;
 import infra.dao.DAO;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import app.utils.CPFValidator;
 import app.utils.DatabaseManager;
 
-public class UpdateAluno {
+public class SearchAlunoTest {
 	
 	private static IDAO<Aluno> alunoDao;
 	private static Aluno aluno;
@@ -30,25 +26,17 @@ public class UpdateAluno {
 	private static Filiado filiado;
 	private static Filiado filiadoProf;
 	private static Professor professor;
-	private static Rg rg;
 	
 	@BeforeClass
 	public static void setUp(){
 		DatabaseManager.setEnviroment(DatabaseManager.TEST);
-
-		rg = new Rg();
-		rg.setNumero("18.889.037-3");
-		rg.setOrgaoExpedidor("SSP");
-
 		filiado = new Filiado();
 		filiado.setNome("Vitorio Lotto");
-		filiado.setCpf("84157215010");
+		filiado.setCpf("841.572.150-10");
 		filiado.setDataNascimento(new Date());
 		filiado.setDataCadastro(new Date());
 		filiado.setEmail("vitorio.lotto@gmail.com");
-		filiado.setRg(rg);
-		filiado.setTelefone1("11 992366841");
-		filiado.setRegistroCbj("123");
+		filiado.setTelefone1("11992366841");
 		filiado.setId(1332L);
 		
 		endereco = new Endereco();
@@ -80,7 +68,7 @@ public class UpdateAluno {
 		aluno.setProfessor(professor);
 		aluno.setEntidade(entidade);
 		
-		alunoDao = new DAO<Aluno>(Aluno.class, new AlunoValidator(), true);
+		alunoDao = new DAO<Aluno>(Aluno.class);
 	}
 
 	public static void clearDatabase(){
@@ -91,28 +79,47 @@ public class UpdateAluno {
 		assertEquals(0, alunoDao.list().size());
 	}
 	
-	// Cenário 01 e 02
+	// Cenário 01
 	@Test
-	public void  ReturnsOk() throws Exception {
+	public void ReturnsOk() throws Exception {
 		// Arange
 		clearDatabase();
-		assertEquals(0, alunoDao.list().size());
+		alunoDao.save(aluno);
 		
-		boolean isAlunoUpdated = alunoDao.save(aluno);
-		assertEquals(true, isAlunoUpdated);
-		assertEquals(1, alunoDao.list().size());
-		assertEquals("Vitorio Lotto", aluno.getFiliado().getNome());
+		Filiado f = new Filiado();
+		f.setNome("Vitorio Lotto");
+		Aluno a = new Aluno();
+		a.setFiliado(f);
 		
 		// Act
-		Aluno a1 = alunoDao.get(aluno);
-		a1.getFiliado().setNome("Jefferson Tomiatti");
-		alunoDao.save(a1);
-		
-		Aluno a2 = alunoDao.get(a1);
-
+		List<Aluno> result = alunoDao.search(a);
 
 		// Assert
-		assertEquals("Jefferson Tomiatti", a2.getFiliado().getNome());
 		assertEquals(1, alunoDao.list().size());
+		assertEquals(1, result.size());
+		assertEquals("841.572.150-10", result.get(0).getFiliado().getCpf());
+
 	}
+
+	// Cenário 02
+	@Test
+	public void ReturnsNotFound() throws Exception {
+		// Arange
+		clearDatabase();
+		alunoDao.save(aluno);
+		
+		Filiado f = new Filiado();
+		f.setNome("Jeff");
+		Aluno a = new Aluno();
+		a.setFiliado(f);
+		
+		// Act
+		List<Aluno> result = alunoDao.search(a);
+
+		// Assert
+		assertEquals(1, alunoDao.list().size());
+		assertEquals(0, result.size());
+
+	}
+	
 }

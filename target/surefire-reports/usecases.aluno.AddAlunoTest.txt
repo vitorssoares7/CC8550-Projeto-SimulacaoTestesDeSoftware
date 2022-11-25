@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: model.dao.AlunoDaoTest
+Test set: usecases.aluno.AddAlunoTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.902 s - in model.dao.AlunoDaoTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.414 s - in usecases.aluno.AddAlunoTest

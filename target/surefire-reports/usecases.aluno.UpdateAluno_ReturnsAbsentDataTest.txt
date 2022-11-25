@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: usecases.aluno.UpdateAluno_ReturnsAbsentDataTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.121 s - in usecases.aluno.UpdateAluno_ReturnsAbsentDataTest
