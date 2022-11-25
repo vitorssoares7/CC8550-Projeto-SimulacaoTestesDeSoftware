@@ -1,11 +1,11 @@
 package core.validators;
 
 import app.utils.CPFValidator;
-import core.entities.Aluno;
+import core.entities.Professor;
 import core.interfaces.IValidator;
 
-public class AlunoValidator implements IValidator<Aluno>{
-	public boolean validate(Aluno obj) {
+public class ProfessorValidator implements IValidator<Professor>{
+	public boolean validate(Professor obj) {
 		EnderecoValidator enderecoValidator = new EnderecoValidator();
 
 		if (obj.getFiliado().getCpf() == null || obj.getFiliado().getCpf().equals(""))
