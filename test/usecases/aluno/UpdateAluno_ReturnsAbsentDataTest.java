@@ -17,10 +17,9 @@ import infra.dao.DAO;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import app.utils.CPFValidator;
 import app.utils.DatabaseManager;
 
-public class UpdateAluno_ReturnsInvalidData {
+public class UpdateAluno_ReturnsAbsentDataTest {
 	
 	private static IDAO<Aluno> alunoDao;
 	private static Aluno aluno;
@@ -90,9 +89,9 @@ public class UpdateAluno_ReturnsInvalidData {
 		assertEquals(0, alunoDao.list().size());
 	}
 	
-	// Cenário 03
+	// Cenário 04
 	@Test
-	public void ReturnsInvalidData() throws Exception {
+	public void ReturnsAbsentData() throws Exception {
 		// Arange
 		clearDatabase();
 		assertEquals(0, alunoDao.list().size());
@@ -103,7 +102,7 @@ public class UpdateAluno_ReturnsInvalidData {
 
 		// Act
 		Aluno a1 = alunoDao.get(aluno);
-		a1.getFiliado().setCpf("45345234523");
+		aluno.getFiliado().setNome(null);
 		boolean isAlunoUpdated = alunoDao.save(a1);
 	
 		Filiado f = new Filiado();
@@ -114,7 +113,6 @@ public class UpdateAluno_ReturnsInvalidData {
 		List<Aluno> result = alunoDao.search(a);
 
 		// Assert
-		assertEquals(false, CPFValidator.isCPF(a1.getFiliado().getCpf()));
 		assertEquals(false, isAlunoUpdated);
 		assertEquals(1, alunoDao.list().size());
 		assertEquals(1, result.size());

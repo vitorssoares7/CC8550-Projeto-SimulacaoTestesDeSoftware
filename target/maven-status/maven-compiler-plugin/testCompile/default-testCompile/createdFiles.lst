@@ -1,2 +1,6 @@
-model\dao\AlunoDaoTest.class
-model\ModelIntegrationTests.class
+usecases\aluno\UpdateAluno_ReturnsOkTest.class
+usecases\aluno\UpdateAluno_ReturnsInvalidDataTest.class
+usecases\aluno\SearchAlunoTest.class
+models\ValidatorResponse.class
+usecases\aluno\AddAlunoTest.class
+usecases\aluno\UpdateAluno_ReturnsAbsentDataTest.class

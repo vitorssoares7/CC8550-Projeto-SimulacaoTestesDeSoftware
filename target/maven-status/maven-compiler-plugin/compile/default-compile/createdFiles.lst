@@ -13,6 +13,7 @@ infra\business\ProfessorEntidadeBO.class
 app\views\EntidadeBuscarView.class
 app\views\gui\EntidadeCadastrarPanel.class
 core\entities\Rg.class
+app\utils\CPFValidator.class
 app\views\ProfessorCadastrarView$CadastrarActionHandler.class
 infra\interfaces\IEntidadeBO.class
 app\views\EntidadeAtualizarView.class
