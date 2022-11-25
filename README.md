@@ -6,5 +6,5 @@ Aplicação Desktop desenvolvida utilizando a biblioteca de componentes gráfico
 
 Integrantes:
 
-Bruno Brigide - 22.119.047-3
+Bruno Brigide - 22.119.047-3</br>
 Vitor Soares - 22.119.043-2
